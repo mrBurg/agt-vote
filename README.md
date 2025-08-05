@@ -2,7 +2,7 @@
 
 Веб-приложение, позволяющее зрителям голосовать за участников шоу "America's Got Talent" в реальном времени.
 
-![screenshot](./public/screenshot.png)
+![screenshot](./public/screenshot.jpg)
 
 ---
 
