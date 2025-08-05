@@ -23,7 +23,7 @@ export default async function Layout({ children }: LayoutProps) {
 
   const participantsProcessed = results.reduce(
     (accumulator: ParticipantsState, item: Participant) => {
-      const { picture, name, email, login, location } = item;
+      const { picture, name, login, location } = item;
 
       accumulator.push({
         picture,

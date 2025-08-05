@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import classNames from 'classnames';
 
-import styles from './Avatar.module.scss';
+import styles from './avatar.module.scss';
 
 import type { AvatarProps } from './types';
 
