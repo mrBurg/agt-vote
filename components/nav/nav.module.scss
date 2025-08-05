@@ -1,0 +1,16 @@
+@use './../../style/service/constants' as *;
+
+.nav {
+    display: flex;
+    gap: 0.5em;
+    padding: 0.5em;
+
+    :global(.link) {
+        text-decoration: none;
+        color: $lightText;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

@@ -1,0 +1,26 @@
+@use './../../style/service/constants' as *;
+@use './../../style/service/mixins' as *;
+
+.participants {
+    display: grid;
+    grid-gap: 0.5em;
+    align-content: flex-start;
+    grid-template-columns: repeat(auto-fit, minmax($minWidth - 16, 1fr));
+    // grid-template-columns: 1fr;
+
+    /* @include respond(mobile) {
+        grid-template-columns: 1fr;
+    } */
+
+    /* @include respond(tablet) {
+        grid-template-columns: repeat(2, 1fr);
+    } */
+
+    /* @include respond(desktop) {
+        grid-template-columns: repeat(3, 1fr);
+    } */
+
+    /* @include respond(gt, $desktop) {
+        grid-template-columns: repeat(auto-fit, minmax($minWidth, 1fr));
+    } */
+}

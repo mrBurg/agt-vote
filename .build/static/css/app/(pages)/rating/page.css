@@ -1,0 +1,40 @@
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[7].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[7].use[5]!./components/rating-table/rating-table.module.scss ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.rating-table_list__A0fyh {
+  display: grid;
+  grid-gap: 0.5em;
+  align-content: start;
+}
+.rating-table_list__item__CUmaK {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  background-color: rgba(11, 31, 53, 0.8);
+  border-radius: 1em;
+  border: solid 1px;
+  padding: 0.5em;
+  grid-gap: 0.5em;
+}
+.rating-table_list__item__CUmaK div.rating-table_list__item__avatar__JBnJc {
+  min-width: auto;
+  width: 50px;
+}
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[7].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[7].use[5]!./components/avatar/Avatar.module.scss ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.Avatar_info__HSNC_ {
+  display: grid;
+  grid-gap: 0.5em;
+}
+
+.Avatar_avatar__CmOx4 {
+  position: relative;
+  aspect-ratio: 1/1;
+  max-width: 127px;
+  min-width: 70px;
+}
+.Avatar_avatar__CmOx4 img {
+  -webkit-mask: url("/star-mask.svg");
+  mask: url("/star-mask.svg");
+}

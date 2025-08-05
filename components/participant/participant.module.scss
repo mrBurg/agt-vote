@@ -1,0 +1,71 @@
+@use 'sass:color';
+
+@use './../../style/service/constants' as *;
+
+.participant {
+    // background-color: color.change($bgColor, $alpha: 0.8);
+    background-color: rgba($bgColor, 0.8);
+    padding: 1.5em;
+    border-radius: 1em;
+    border: solid 1px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.info {
+    display: grid;
+    grid-gap: 0.5em;
+}
+
+.actions {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.votes {
+    font-weight: bold;
+
+    &Num {
+        font-size: 1.5em;
+    }
+}
+
+.button {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    width: 70px;
+
+    &:disabled {
+        cursor: auto;
+    }
+}
+
+@keyframes fly-up {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    30% {
+        transform: translateY(-60px) scale(1.2);
+        opacity: 0;
+    }
+    70% {
+        transform: translateY(-60px) scale(1.2);
+        opacity: 0;
+    }
+    71% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.animate {
+    animation: fly-up 500ms ease-in forwards;
+    pointer-events: none;
+}

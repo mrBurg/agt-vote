@@ -1,0 +1,7 @@
+@use './service/constants' as *;
+
+.main {
+    color: $lightText;
+    display: grid;
+    padding: 0.5em;
+}

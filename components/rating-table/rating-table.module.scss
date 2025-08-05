@@ -1,0 +1,25 @@
+@use 'sass:color';
+
+@use './../../style/service/constants' as *;
+
+.list {
+    display: grid;
+    grid-gap: 0.5em;
+    align-content: start;
+
+    &__item {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        background-color: rgba($bgColor, 0.8);
+        border-radius: 1em;
+        border: solid 1px;
+        padding: 0.5em;
+        grid-gap: 0.5em;
+
+        div#{&}__avatar {
+            min-width: auto;
+            width: 50px;
+        }
+    }
+}

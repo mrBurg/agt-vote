@@ -1,0 +1,81 @@
+import { useEffect, useRef, useState } from 'react';
+import classNames from 'classnames';
+
+import styles from './participant.module.scss';
+
+import type { Participant } from '@/redux//slices/types';
+
+import Rate from './components/rate.svg';
+
+import { Avatar } from '../avatar';
+import { useAppDispatch } from '@/redux/hooks';
+import { updateVote } from '@/redux/slices/participantsSlices';
+
+export function Participant({
+  picture,
+  name,
+  location,
+  login,
+  votes,
+}: Participant) {
+  const dispatch = useAppDispatch();
+  const rateRef = useRef<SVGSVGElement>(null);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const handleClick = () => {
+    if (isAnimating) {
+      return;
+    }
+
+    dispatch(updateVote(login.salt));
+    setIsAnimating(true);
+  };
+
+  useEffect(() => {
+    const node = rateRef.current;
+
+    if (node) {
+      const handleAnimationEnd = () => {
+        setIsAnimating(false);
+      };
+
+      node.addEventListener('animationend', handleAnimationEnd);
+
+      return () => {
+        node.removeEventListener('animationend', handleAnimationEnd);
+      };
+    }
+  }, []);
+
+  return (
+    <div className={classNames('participant', styles.participant)}>
+      <div className={styles.info}>
+        <Avatar
+          src={picture.large}
+          alt={`${name.title} ${name.first} ${name.last}`}
+          fit="contain"
+        />
+        <div>
+          {name.title} {name.first} {name.last}
+        </div>
+        <div>{location.city}</div>
+        <div className={styles.votes}>
+          Total votes: <span className={styles.votesNum}>{votes}</span>
+        </div>
+      </div>
+      <div className={styles.actions}>
+        <button
+          className={styles.button}
+          type="button"
+          onClick={handleClick}
+          disabled={isAnimating}
+        >
+          <Rate
+            ref={rateRef}
+            className={classNames({ [styles.animate]: isAnimating })}
+          />
+        </button>
+      </div>
+    </div>
+  );
+}

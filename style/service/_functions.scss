@@ -1,0 +1,7 @@
+@use 'sass:math';
+
+@use './constants' as *;
+
+@function golden-ratio($num) {
+    @return math.div(round($num * $golden-ratio * 100), 100);
+}

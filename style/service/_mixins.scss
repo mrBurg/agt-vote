@@ -1,0 +1,31 @@
+@use 'sass:meta';
+
+@use './constants' as *;
+
+@mixin respond($device: null, $size: $minWidth) {
+    @if meta.type-of($device) == number or meta.type-of($device) == string {
+        @if $device == gt {
+            @media screen and (width > $size) {
+                @content;
+            }
+        } @else if $device == desktop {
+            @media screen and (width > $tablet) {
+                @content;
+            }
+        } @else if $device == tablet {
+            @media screen and (width >= $mobile) and (width <= $tablet) {
+                @content;
+            }
+        } @else if $device == mobile {
+            @media screen and (width < $mobile) {
+                @content;
+            }
+        } @else {
+            @media screen and (width <= $device) {
+                @content;
+            }
+        }
+    } @else {
+        @error '❌ respond() mixin: unknown value type "#{$device}". Expected "mobile", "tablet", "desktop" or a pixel number';
+    }
+}
