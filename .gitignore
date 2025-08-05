@@ -24,6 +24,7 @@
 # misc
 .DS_Store
 *.pem
+/materials
 
 # debug
 npm-debug.log*
