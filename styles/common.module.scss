@@ -1,0 +1,15 @@
+@use './service/constants' as *;
+
+.template {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100%;
+    background: $backgroundColor url('/background.jpg') center / cover no-repeat
+        fixed;
+}
+
+.main {
+    color: $lightTextColor;
+    display: grid;
+    padding: 0.5em;
+}

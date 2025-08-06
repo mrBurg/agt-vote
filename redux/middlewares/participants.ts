@@ -2,7 +2,7 @@ import { Middleware } from '@reduxjs/toolkit';
 import { isEqual } from 'lodash';
 import { Socket } from 'socket.io-client';
 
-import type { Nav, Participant } from '@/redux/slices/types';
+import type { FooterState, NavState, ParticipantsState } from '../slices';
 
 let socket: Socket | null = null;
 
@@ -12,11 +12,7 @@ export function setSocketParticipantsMiddleware(socketInstance: Socket) {
 
 export const participantsSocketMiddleware: Middleware<
   {},
-  {
-    participants: Participant[];
-    nav: Nav[];
-    footer: string;
-  }
+  MiddlewareStoreProps
 > = (store) => (next) => (action) => {
   const prevParticipants = store.getState().participants;
   const result = next(action);
@@ -31,4 +27,10 @@ export const participantsSocketMiddleware: Middleware<
   }
 
   return result;
+};
+
+export type MiddlewareStoreProps = {
+  participants: ParticipantsState;
+  nav: NavState;
+  footer: FooterState;
 };

@@ -1,13 +1,13 @@
 @use 'sass:color';
 
-@use './../../style/service/constants' as *;
+@use './../../styles/service/constants' as *;
 
 .participant {
-    // background-color: color.change($bgColor, $alpha: 0.8);
-    background-color: rgba($bgColor, 0.8);
+    // background-color: color.change($backgroundColor, $alpha: 0.8);
+    background-color: rgba($backgroundColor, 0.8);
     padding: 1.5em;
     border-radius: 1em;
-    border: solid 1px;
+    border: solid 1px $lightBorderColor;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 }

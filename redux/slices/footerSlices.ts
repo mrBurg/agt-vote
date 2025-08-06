@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '../store';
 
-const initialState = '';
+const initialState: string = '';
 
 const footerSlices = createSlice({
   name: 'footer',
@@ -10,10 +10,10 @@ const footerSlices = createSlice({
   reducers: {},
 });
 
-export const { name } = footerSlices;
 export const selectFooter = (state: RootState) => state.footer;
 
-export default footerSlices.reducer;
+export const { name: footerName } = footerSlices;
+export const footerReducer = footerSlices.reducer;
 
 export type FooterState = typeof initialState;
-export type FooterSlice = { footer: FooterState };
+export type FooterProps = { footer: FooterState };

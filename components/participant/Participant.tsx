@@ -3,13 +3,11 @@ import classNames from 'classnames';
 
 import styles from './participant.module.scss';
 
-import type { Participant } from '@/redux//slices/types';
-
 import Rate from './components/rate.svg';
 
 import { Avatar } from '../avatar';
 import { useAppDispatch } from '@/redux/hooks';
-import { updateVote } from '@/redux/slices/participantsSlices';
+import { updateVote } from '@/redux/slices';
 
 export function Participant({
   picture,
@@ -17,7 +15,7 @@ export function Participant({
   location,
   login,
   votes,
-}: Participant) {
+}: ParticipantProps) {
   const dispatch = useAppDispatch();
   const rateRef = useRef<SVGSVGElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -79,3 +77,45 @@ export function Participant({
     </div>
   );
 }
+
+export type ParticipantProps = {
+  picture: Record<'large' | 'medium' | 'thumbnail', string>;
+  name: Record<'title' | 'first' | 'last', string>;
+  login: Record<
+    'uuid' | 'username' | 'password' | 'salt' | 'md5' | 'sha1' | 'sha256',
+    string
+  >;
+  votes: number;
+  location: {
+    city: string;
+    state?: string;
+    country?: string;
+    postcode?: number;
+    street?: {
+      number: number;
+      name: string;
+    };
+    coordinates?: {
+      latitude: string;
+      longitude: string;
+    };
+    timezone?: {
+      offset: string;
+      description: string;
+    };
+  };
+  phone?: string;
+  id?: {
+    name: string;
+    value: string;
+  };
+} & Partial<
+  Record<'gender' | 'email' | 'nat' | 'cell', string> &
+    Record<
+      'dob' | 'registered',
+      {
+        date: string;
+        age: number;
+      }
+    >
+>;

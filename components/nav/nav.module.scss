@@ -1,13 +1,13 @@
-@use './../../style/service/constants' as *;
+@use './../../styles/service/constants' as *;
 
 .nav {
     display: flex;
     gap: 0.5em;
-    padding: 0.5em;
+    align-items: center;
 
     :global(.link) {
         text-decoration: none;
-        color: $lightText;
+        color: $lightTextColor;
 
         &:hover {
             text-decoration: underline;

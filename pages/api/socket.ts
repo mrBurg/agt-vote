@@ -3,17 +3,9 @@ import { Server as HTTPServer } from 'http';
 import { Server as IOServer } from 'socket.io';
 import type { Socket as NetSocket } from 'net';
 
-import { Participant } from '@/redux/slices/types';
+import type { ParticipantProps } from '@/components/participant';
 
-type NextApiResponseWithSocketIO = NextApiResponse & {
-  socket: NetSocket & {
-    server: HTTPServer & {
-      io?: IOServer;
-    };
-  };
-};
-
-let participants: Participant[] = [];
+let participants: ParticipantProps[] = [];
 
 export default function handler(
   _req: NextApiRequest,
@@ -33,20 +25,26 @@ export default function handler(
     io.on('connection', (socket) => {
       console.log('🔌 New client connected');
 
-      socket.on('message', (data) => {
-        // socket.emit('message', 'From socket to page');
-        // socket.broadcast.emit('message', 'From socket to page');
-        io.emit('message', `From socket to page ${data}`);
+      const message = 'message';
+
+      socket.on(message, (data) => {
+        // socket.emit(message, 'From socket to page');
+        // socket.broadcast.emit(message, 'From socket to page');
+        io.emit(message, `From socket to page ${data}`);
       });
 
-      socket.on('setParticipants', (data) => {
+      const setParticipants = 'setParticipants';
+
+      socket.on(setParticipants, (data) => {
         participants = data;
 
-        io.emit('setParticipants', data);
+        io.emit(setParticipants, data);
       });
 
-      socket.on('getParticipants', () => {
-        io.emit('getParticipants', participants);
+      const getParticipants = 'getParticipants';
+
+      socket.on(getParticipants, () => {
+        io.emit(getParticipants, participants);
       });
 
       socket.on('disconnect', () => {
@@ -61,3 +59,11 @@ export default function handler(
 
   res.end();
 }
+
+type NextApiResponseWithSocketIO = NextApiResponse & {
+  socket: NetSocket & {
+    server: HTTPServer & {
+      io?: IOServer;
+    };
+  };
+};

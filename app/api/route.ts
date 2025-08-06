@@ -2,6 +2,7 @@ import 'server-only';
 
 export async function GET() {
   return Response.json({
+    lang: 'en',
     nav: [
       {
         href: '/',
@@ -13,5 +14,6 @@ export async function GET() {
       },
     ],
     footer: `&copy; ${new Date().getFullYear()}`,
+    numParticipants: 9,
   });
 }

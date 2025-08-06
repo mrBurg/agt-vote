@@ -1,19 +1,19 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, {
+  type PropsWithChildren,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { io, Socket } from 'socket.io-client';
 
-import type { LayoutProps } from '@/app/types';
-
-import { setSocketParticipantsMiddleware } from '@/redux/middlewares/participants';
-
-type SocketContextType = {
-  socket: Socket | null;
-};
+import { setSocketParticipantsMiddleware } from '@/redux/middlewares';
 
 const SocketContext = createContext<SocketContextType>({ socket: null });
 
-export default function SocketProvider({ children }: LayoutProps) {
+export function SocketProvider({ children }: PropsWithChildren) {
   const [socket, setSocket] = useState<Socket | null>(null);
 
   useEffect(() => {
@@ -45,3 +45,7 @@ export default function SocketProvider({ children }: LayoutProps) {
 export function useSocket() {
   return useContext(SocketContext);
 }
+
+export type SocketContextType = {
+  socket: Socket | null;
+};

@@ -1,10 +1,13 @@
 import type { Metadata } from 'next';
 
-import { RatingTable } from '@/components/rating-table';
+import type { MetaProps } from '@/types';
 
-export const metadata: Metadata = {
-  title: "America's Got Talent: RatingTable",
-};
+import { RatingTable } from '@/components/rating-table';
+import { fetcher } from '@/utils/request';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return await fetcher<MetaProps>('/api/meta');
+}
 
 export default function Rating() {
   return <RatingTable />;

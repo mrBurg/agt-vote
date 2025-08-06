@@ -1,4 +1,4 @@
-@use './../style/service/constants' as *;
+@use './../styles/service/constants' as *;
 
 * {
     box-sizing: border-box;
@@ -22,26 +22,12 @@ body {
     min-width: $minWidth;
 }
 
-.template {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    min-height: 100%;
-    background: transparent url('/background.jpg') center / cover no-repeat
-        fixed;
-}
-
 header,
 footer {
-    background-color: $bgColor;
-    color: $lightText;
+    background-color: $backgroundColor;
+    color: $lightTextColor;
     padding: 0.5em;
-}
-
-header {
+    min-height: 50px;
     display: flex;
-    justify-content: center;
-}
-
-footer {
-    text-align: center;
+    align-items: center;
 }

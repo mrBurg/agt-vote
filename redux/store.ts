@@ -1,22 +1,25 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 // import { setupListeners } from '@reduxjs/toolkit/query';
 
-import participants, {
-  name as participantsName,
-  ParticipantsSlice,
-} from './slices/participantsSlices';
-import nav, { name as navName } from './slices/navSlices';
-import footer, { name as footerName } from './slices/footerSlices';
-import { participantsSocketMiddleware } from '@/redux/middlewares/participants';
+import {
+  type ParticipantsProps,
+  navName,
+  navReducer,
+  participantsName,
+  participantsReducer,
+  footerName,
+  footerReducer,
+} from './slices';
+import { participantsSocketMiddleware } from './middlewares';
 
 // import { api } from './services/api';
 
-export function createStore(preloadedState?: ParticipantsSlice) {
+export function createStore(preloadedState?: ParticipantsProps) {
   const store = configureStore({
     reducer: combineReducers({
-      [participantsName]: participants,
-      [navName]: nav,
-      [footerName]: footer,
+      [participantsName]: participantsReducer,
+      [navName]: navReducer,
+      [footerName]: footerReducer,
       // [api.reducerPath]: api.reducer,
     }),
     middleware: (getDefaultMiddleware) =>

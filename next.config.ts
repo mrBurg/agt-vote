@@ -9,6 +9,7 @@ const withBundleAnalyzer = bundleAnalyzer({
 
 const nextConfig: NextConfig = {
   distDir: '.build',
+  output: 'standalone',
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -22,19 +23,18 @@ const nextConfig: NextConfig = {
 
     return config;
   },
-  /* experimental: {
-    turbo: {
-      root: path.join(__dirname),
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
-      },
-    },
-  }, */
+  sassOptions: {
+    includePaths: [path.join(__dirname)],
+  },
   images: {
-    remotePatterns: [new URL(`${process.env.NEXT_PUBLIC_PARTICIPANT_API}/**`)],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: new URL(process.env.NEXT_PUBLIC_PARTICIPANT_API || '')
+          .hostname,
+        pathname: '/**',
+      },
+    ],
   },
 };
 

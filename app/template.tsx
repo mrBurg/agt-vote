@@ -1,16 +1,17 @@
+import type { PropsWithChildren } from 'react';
 import classNames from 'classnames';
 
-import styles from './../style/common.module.scss';
+import styles from './../styles/common.module.scss';
 
-import type { LayoutProps } from './types';
-
+import { Logo } from '@/components/logo';
 import { Nav } from '@/components/nav';
 import { Footer } from '@/components/footer';
 
-export default function Template({ children }: LayoutProps) {
+export default function Template({ children }: PropsWithChildren) {
   return (
-    <div className="template">
+    <div className={styles.template}>
       <header>
+        <Logo />
         <Nav />
       </header>
       <main className={classNames(styles.main)}>{children}</main>

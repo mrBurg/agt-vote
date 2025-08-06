@@ -1,10 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import type { Nav } from './types';
+import type { RootState } from '../store';
 
-import { RootState } from '../store';
-
-const initialState: Nav[] = [];
+const initialState: NavLinkProps[] = [];
 
 const navSlices = createSlice({
   name: 'nav',
@@ -12,10 +10,15 @@ const navSlices = createSlice({
   reducers: {},
 });
 
-export const { name } = navSlices;
 export const selectNav = (state: RootState) => state.nav;
 
-export default navSlices.reducer;
+export const { name: navName } = navSlices;
+export const navReducer = navSlices.reducer;
 
 export type NavState = typeof initialState;
-export type NavSlice = { nav: NavState };
+export type NavProps = { nav: NavState };
+
+export type NavLinkProps = {
+  href: string;
+  title: string;
+};

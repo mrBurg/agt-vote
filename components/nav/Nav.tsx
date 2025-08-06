@@ -8,7 +8,7 @@ import { map } from 'lodash';
 
 import styles from './nav.module.scss';
 
-import { selectNav } from '@/redux/slices/navSlices';
+import { selectNav } from '@/redux/slices';
 import { useAppSelector } from '@/redux/hooks';
 
 export function Nav() {

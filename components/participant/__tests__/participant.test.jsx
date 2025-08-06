@@ -8,7 +8,7 @@ import { Participant } from '../';
 
 const participantProps = {
   picture: {
-    large: '/image.jpg',
+    large: '/background.jpg',
   },
   name: {
     title: 'title',

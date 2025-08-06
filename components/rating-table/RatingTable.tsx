@@ -8,7 +8,7 @@ import { Flipper, Flipped } from 'react-flip-toolkit';
 import style from './rating-table.module.scss';
 
 import { useAppSelector } from '@/redux/hooks';
-import { selectParticipants } from '@/redux/slices/participantsSlices';
+import { selectParticipants } from '@/redux/slices';
 import { Avatar } from '../avatar';
 
 export function RatingTable() {
@@ -43,7 +43,7 @@ export function RatingTable() {
                 fit="contain"
               />
               <div>
-                ${participant.name.title} {participant.name.first}{' '}
+                {participant.name.title} {participant.name.first}{' '}
                 {participant.name.last}: {participant.votes}
               </div>
             </li>

@@ -1,11 +1,10 @@
 'use client';
 
+import { CSSProperties } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
 
 import styles from './avatar.module.scss';
-
-import type { AvatarProps } from './types';
 
 export function Avatar({ src, alt, fit, className }: AvatarProps) {
   return (
@@ -21,3 +20,10 @@ export function Avatar({ src, alt, fit, className }: AvatarProps) {
     </div>
   );
 }
+
+export type AvatarProps = {
+  src: string;
+  alt: string;
+  fit: CSSProperties['objectFit'];
+  className?: string;
+};

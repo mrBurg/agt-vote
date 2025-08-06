@@ -1,50 +1,53 @@
+import type { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
 
 import './globals.scss';
 
-import type { LayoutProps } from './types';
-import type { NavSlice } from '@/redux/slices/navSlices';
-import type { ParticipantsState } from '@/redux/slices/participantsSlices';
-import type { FooterSlice } from '@/redux/slices/footerSlices';
-import type { Participant } from '@/redux/slices/types';
+import type { LayoutProps, MetaProps, ParticipantsResultsProps } from '@/types';
+import type { ParticipantsState } from '@/redux/slices';
+import type { ParticipantProps } from '@/components/participant';
 
-import StoreProvider from '@/providers/StoreProvider';
-import SocketProvider from '@/providers/SocketProvider';
-import { fetcher, participantsFetcher } from '@/utils/request';
+import { fetcher } from '@/utils';
+import { SocketProvider, StoreProvider } from '@/providers';
 
-export const metadata: Metadata = {
-  title: "America's Got Talent",
-  description: 'Audience Voting',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return await fetcher<MetaProps>('/api/meta');
+}
 
-export default async function Layout({ children }: LayoutProps) {
-  const { nav, footer } = await fetcher<NavSlice & FooterSlice>('/api');
-  const { results } = await participantsFetcher(9);
-
-  const participantsProcessed = results.reduce(
-    (accumulator: ParticipantsState, item: Participant) => {
-      const { picture, name, login, location } = item;
-
-      accumulator.push({
-        picture,
-        name,
-        login,
-        location,
-        votes: 0,
-      });
-
-      return accumulator;
-    },
-    []
+export default async function Layout({ children }: PropsWithChildren) {
+  const { lang, nav, footer, numParticipants } = await fetcher<LayoutProps>(
+    '/api'
   );
 
+  let { results } = await fetcher<ParticipantsResultsProps>(
+    `/?seed=constant-user&results=${numParticipants}`,
+    process.env.NEXT_PUBLIC_PARTICIPANT_API
+  );
+
+  if (results) {
+    results = results.reduce(
+      (accumulator: ParticipantsState, item: ParticipantProps) => {
+        const { picture, name, login, location } = item;
+
+        accumulator.push({
+          picture,
+          name,
+          login,
+          location,
+          votes: 0,
+        });
+
+        return accumulator;
+      },
+      []
+    );
+  }
+
   return (
-    <html lang="en">
-      <body className="body">
+    <html lang={lang}>
+      <body suppressHydrationWarning={true}>
         <SocketProvider>
-          <StoreProvider
-            initialState={{ nav, participants: participantsProcessed, footer }}
-          >
+          <StoreProvider initialState={{ nav, participants: results, footer }}>
             {children}
           </StoreProvider>
         </SocketProvider>

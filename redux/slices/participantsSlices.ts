@@ -1,11 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { find } from 'lodash';
 
-import type { Participant } from './types';
+import type { ParticipantProps } from '@/components/participant';
+import type { RootState } from '../store';
 
-import { RootState } from '../store';
-
-const initialState: Participant[] = [];
+const initialState: ParticipantProps[] = [];
 
 const participantsSlices = createSlice({
   name: 'participants',
@@ -25,12 +24,12 @@ const participantsSlices = createSlice({
   },
 });
 
-export const { name } = participantsSlices;
-export const { updateVote, setParticipants } = participantsSlices.actions;
-
 export const selectParticipants = (state: RootState) => state.participants;
 
-export default participantsSlices.reducer;
+export const { name: participantsName } = participantsSlices;
+export const { updateVote, setParticipants } = participantsSlices.actions;
+
+export const participantsReducer = participantsSlices.reducer;
 
 export type ParticipantsState = typeof initialState;
-export type ParticipantsSlice = { participants: ParticipantsState };
+export type ParticipantsProps = { participants: ParticipantsState };
