@@ -1,27 +1,23 @@
 import '@testing-library/jest-dom';
+
 import { Provider } from 'react-redux';
 import { createStore } from '@/redux/store';
 
 import { render, screen } from '@testing-library/react';
 
-import { Participant } from '../';
+import { type ParticipantProps, Participant } from './..';
 
-const participantProps = {
-  picture: {
-    large: '/background.jpg',
-  },
-  name: {
-    title: 'title',
-    first: 'first',
-    last: 'last',
-  },
-  location: {
-    city: 'city',
-  },
-  login: {
-    uuid: '00000000-0000-0000-0000-000000000000',
-  },
-  vaotes: 0,
+jest.mock('./../components/rate.svg', () => ({
+  __esModule: true,
+  default: () => <svg data-testid="mock-rate" />,
+}));
+
+const participantProps: ParticipantProps = {
+  picture: { large: '/background.jpg' },
+  name: { title: 'Mr.', first: 'John', last: 'Doe' },
+  location: { city: 'New York' },
+  login: { salt: 'Abcdefjh' },
+  votes: 0,
 };
 
 describe('Participant', () => {
@@ -35,6 +31,6 @@ describe('Participant', () => {
     );
 
     expect(container).not.toBeEmptyDOMElement();
-    expect(screen.getByText(/city/i)).toBeInTheDocument();
+    expect(screen.getByText(/Total votes/i)).toBeInTheDocument();
   });
 });
