@@ -1,6 +1,6 @@
 @use 'sass:color';
 
-@use './../../styles/service/constants' as *;
+@use './../../styles/service/constants.module' as *;
 
 .list {
     display: grid;

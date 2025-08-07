@@ -1,4 +1,4 @@
-@use './constants' as *;
+@forward './constants.module';
 
 %transition {
     transition: all 0.2s;

@@ -1,6 +1,6 @@
 @use 'sass:meta';
 
-@use './constants' as *;
+@forward './constants.module';
 
 @mixin respond($device: null, $size: $minWidth) {
     @if meta.type-of($device) == number or meta.type-of($device) == string {

@@ -1,15 +1,13 @@
 @use 'sass:color';
 
-@use './service/constants' as *;
+@use './service/constants.module' as *;
 
 .template {
     display: grid;
     grid-template-rows: auto 1fr auto;
     min-height: 100%;
-    background-color: color.scale($backgroundColor, $lightness: 7%);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    background: color.scale($backgroundColor, $lightness: 7%) center center /
+        cover no-repeat;
 }
 
 .main {

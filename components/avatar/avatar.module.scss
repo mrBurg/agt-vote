@@ -8,9 +8,8 @@
     aspect-ratio: 1/1;
     max-width: 127px;
     min-width: 70px;
-
-    img {
-        -webkit-mask: url('/star-mask.svg');
-        mask: url('/star-mask.svg');
-    }
+    // -webkit-mask: url('#star-mask');
+    // mask: url('#star-mask');
+    mask-composite: add;
+    mask-mode: alpha;
 }

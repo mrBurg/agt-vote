@@ -8,3 +8,10 @@ $desktop: 1280px;
 $backgroundColor: #0b1f35;
 $lightTextColor: white;
 $lightBorderColor: white;
+
+:export {
+    minWidth: $minWidth;
+    mobile: $mobile;
+    tablet: $tablet;
+    desktop: $desktop;
+}
