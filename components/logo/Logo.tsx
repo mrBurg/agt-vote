@@ -1,21 +1,18 @@
 'use client';
 
-import Image from 'next/image';
 import classNames from 'classnames';
+import Link from 'next/link';
 
 import styles from './logo.module.scss';
+
+import LogoImage from './assets/logo.svg';
 
 export function Logo({ className }: LogoProps) {
   return (
     <div className={classNames(className, styles.logo)}>
-      <Image
-        src={'/logo.svg'}
-        alt={'logo'}
-        style={{ objectFit: 'contain' }}
-        sizes={'(max-width: 768px) 100vw, 50vw'}
-        fill
-        priority
-      />
+      <Link href={'/'}>
+        <LogoImage />
+      </Link>
     </div>
   );
 }

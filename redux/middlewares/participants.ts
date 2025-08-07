@@ -24,10 +24,15 @@ export const participantsSocketMiddleware: Middleware<
     !isEqual(prevParticipants, nextParticipants)
   ) {
     socket.emit('setParticipants', nextParticipants);
+    // socket.emit('vote');
   }
 
   return result;
 };
+
+/* export const config = {
+  matcher: ['/', '/taring'],
+}; */
 
 export type MiddlewareStoreProps = {
   participants: ParticipantsState;

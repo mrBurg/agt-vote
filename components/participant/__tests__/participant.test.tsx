@@ -13,7 +13,10 @@ jest.mock('./../components/rate.svg', () => ({
 }));
 
 const participantProps: ParticipantProps = {
-  picture: { large: '/background.jpg' },
+  picture: {
+    large: 'https://randomuser.me/api/portraits/men/*.jpg',
+    base64: 'data:image/jpeg;base64,/*//Z',
+  },
   name: { title: 'Mr.', first: 'John', last: 'Doe' },
   location: { city: 'New York' },
   login: { salt: 'Abcdefjh' },

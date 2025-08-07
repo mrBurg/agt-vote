@@ -13,7 +13,7 @@ export function Avatar({ src, alt, fit, className }: AvatarProps) {
         src={src}
         alt={alt}
         style={{ objectFit: fit }}
-        sizes={'(max-width: 768px) 100vw, 50vw'}
+        sizes={'any'}
         fill
         priority
       />

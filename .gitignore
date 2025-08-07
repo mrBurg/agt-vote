@@ -19,7 +19,8 @@
 /out/
 
 # production
-/build
+/.build
+/.swc
 
 # misc
 .DS_Store

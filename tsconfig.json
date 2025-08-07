@@ -27,7 +27,8 @@
       "@/utils/*": ["./utils/*"],
       "@/styles/*": ["./styles/*"],
       "@/redux/*": ["./redux/*"],
-      "@/providers/*": ["./providers/*"]
+      "@/providers/*": ["./providers/*"],
+      "@/assets/*": ["./assets/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", ".build/types/**/*.ts", "next-env.d.ts"],

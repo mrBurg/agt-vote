@@ -13,10 +13,13 @@ export function Participants() {
   const participants = useAppSelector(selectParticipants);
 
   return (
-    <div className={classNames('participants', styles.participants)}>
-      {map(participants, (participant, index) => (
-        <Participant key={index} {...participant} />
-      ))}
-    </div>
+    <>
+      {/* <div>num votes</div> */}
+      <div className={classNames('participants', styles.participants)}>
+        {map(participants, (participant, index) => (
+          <Participant key={index} {...participant} />
+        ))}
+      </div>
+    </>
   );
 }

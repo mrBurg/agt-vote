@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import styles from './participant.module.scss';
 
-import Rate from './components/rate.svg';
+import Rate from './assets/rate.svg';
 
 import { Avatar } from '../avatar';
 import { useAppDispatch } from '@/redux/hooks';
@@ -49,7 +49,7 @@ export function Participant({
     <div className={classNames('participant', styles.participant)}>
       <div className={styles.info}>
         <Avatar
-          src={picture.large}
+          src={picture.base64}
           alt={`${name.title} ${name.first} ${name.last}`}
           fit="contain"
         />
@@ -79,7 +79,12 @@ export function Participant({
 }
 
 export type ParticipantProps = {
-  picture: { large: string; medium?: string; thumbnail?: string };
+  picture: {
+    base64: string;
+    large: string;
+    medium?: string;
+    thumbnail?: string;
+  };
   name: Record<'title' | 'first' | 'last', string>;
   login: { salt: string } & Partial<
     Record<'username' | 'password' | 'uuid' | 'md5' | 'sha1' | 'sha256', string>

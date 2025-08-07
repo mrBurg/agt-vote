@@ -7,7 +7,7 @@ import type { LayoutProps, MetaProps, ParticipantsResultsProps } from '@/types';
 import type { ParticipantsState } from '@/redux/slices';
 import type { ParticipantProps } from '@/components/participant';
 
-import { fetcher } from '@/utils';
+import { fetcher, fetchFileAsBase64 } from '@/utils';
 import { SocketProvider, StoreProvider } from '@/providers';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -25,12 +25,18 @@ export default async function Layout({ children }: PropsWithChildren) {
   );
 
   if (results) {
-    results = results.reduce(
-      (accumulator: ParticipantsState, item: ParticipantProps) => {
+    results = await results.reduce<Promise<ParticipantsState>>(
+      async (
+        accPromise: Promise<ParticipantsState>,
+        item: ParticipantProps
+      ) => {
         const { picture, name, login, location } = item;
+        const accumulator = await accPromise;
+
+        const base64 = await fetchFileAsBase64(picture.large);
 
         accumulator.push({
-          picture,
+          picture: { ...picture, base64 },
           name,
           login,
           location,
@@ -39,7 +45,7 @@ export default async function Layout({ children }: PropsWithChildren) {
 
         return accumulator;
       },
-      []
+      Promise.resolve([])
     );
   }
 

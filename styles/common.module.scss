@@ -1,15 +1,20 @@
+@use 'sass:color';
+
 @use './service/constants' as *;
 
 .template {
     display: grid;
     grid-template-rows: auto 1fr auto;
     min-height: 100%;
-    background: $backgroundColor url('/background.jpg') center / cover no-repeat
-        fixed;
+    background-color: color.scale($backgroundColor, $lightness: 7%);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 .main {
     color: $lightTextColor;
     display: grid;
     padding: 0.5em;
+    align-content: start;
 }

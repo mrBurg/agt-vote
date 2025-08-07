@@ -6,6 +6,7 @@ import type { Socket as NetSocket } from 'net';
 import type { ParticipantProps } from '@/components/participant';
 
 let participants: ParticipantProps[] = [];
+// const users: Record<string, UserVoteData> = {};
 
 export default function handler(
   _req: NextApiRequest,
@@ -23,7 +24,32 @@ export default function handler(
     });
 
     io.on('connection', (socket) => {
-      console.log('🔌 New client connected');
+      const userId = socket.id;
+
+      console.log(`🔌 New client connected. ID: ${userId}`);
+
+      /* if (!users[userId]) {
+        users[userId] = {
+          id: userId,
+          votesRemaining: Math.ceil(Math.random() * 10),
+        };
+      } */
+
+      /* socket.on('vote', (participantId) => {
+        let { votesRemaining } = users[userId];
+
+        if (votesRemaining > 0) {
+          votesRemaining--;
+
+          // Обнови голос участника
+          // updateVote(participantId);
+
+          // Верни статус клиенту
+          socket.emit('voteSuccess', { remaining: votesRemaining });
+        } else {
+          socket.emit('voteDenied', 'No votes left');
+        }
+      }); */
 
       const message = 'message';
 
@@ -67,3 +93,8 @@ type NextApiResponseWithSocketIO = NextApiResponse & {
     };
   };
 };
+
+/* type UserVoteData = {
+  id: string;
+  votesRemaining: number;
+}; */

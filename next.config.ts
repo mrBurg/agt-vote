@@ -11,15 +11,28 @@ const nextConfig: NextConfig = {
   distDir: '.build',
   output: 'standalone',
   webpack(config) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: [
-        {
-          loader: '@svgr/webpack',
-          options: {},
+    config.module.rules.push(
+      {
+        test: /\.svg$/,
+        include: path.resolve(__dirname, 'assets'),
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 100 * 1024,
+          },
         },
-      ],
-    });
+      },
+      {
+        test: /\.svg$/,
+        exclude: path.resolve(__dirname, 'assets'),
+        use: [
+          {
+            loader: '@svgr/webpack',
+            options: {},
+          },
+        ],
+      }
+    );
 
     return config;
   },

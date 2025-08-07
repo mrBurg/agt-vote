@@ -4,8 +4,8 @@ import { isEmpty } from 'lodash';
 import { useEffect, useRef } from 'react';
 
 import { useAppDispatch } from '@/redux/hooks';
-import { setParticipants } from '@/redux/slices/participantsSlices';
-import { useSocket } from '@/providers/SocketProvider';
+import { setParticipants } from '@/redux/slices';
+import { useSocket } from '@/providers';
 
 export function ParticipantsProvider() {
   const { socket } = useSocket();
@@ -27,9 +27,19 @@ export function ParticipantsProvider() {
         dispatch(setParticipants(data));
       });
 
+      /* socket.on('voteSuccess', ({ remaining }) => {
+        console.log(`Осталось голосов: ${remaining}`);
+      }); */
+
+      /* socket.on('voteDenied', (message) => {
+        alert(message);
+      });
+ */
       return () => {
         socket.off('getParticipants');
         socket.off('setParticipants');
+        // socket.off('voteSuccess');
+        // socket.off('voteDenied');
       };
     }
   }, [socket]);
