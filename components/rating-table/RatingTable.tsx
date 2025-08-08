@@ -33,22 +33,23 @@ export function RatingTable() {
         .join()}
     >
       <ul className={style.list}>
-        {map(sortedParticipants, (participant, index) => (
-          <Flipped key={participant.login.uuid} flipId={participant.login.uuid}>
-            <li key={index} className={style.list__item}>
-              <Avatar
-                className={style.list__item__avatar}
-                src={participant.picture.large}
-                alt={`${participant.name.title} ${participant.name.first} ${participant.name.last}`}
-                fit="contain"
-              />
-              <div>
-                {participant.name.title} {participant.name.first}{' '}
-                {participant.name.last}: {participant.votes}
-              </div>
-            </li>
-          </Flipped>
-        ))}
+        {map(sortedParticipants, ({ login, picture, name, votes }, index) => {
+          return (
+            <Flipped key={login.uuid} flipId={login.uuid}>
+              <li key={index} className={style.list__item}>
+                <Avatar
+                  className={style.list__item__avatar}
+                  src={picture.base64}
+                  alt={`${name.title} ${name.first} ${name.last}`}
+                  fit="contain"
+                />
+                <div>
+                  {name.title} {name.first} {name.last}: {votes}
+                </div>
+              </li>
+            </Flipped>
+          );
+        })}
       </ul>
     </Flipper>
   );
