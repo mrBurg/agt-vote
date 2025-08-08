@@ -2,7 +2,16 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import type { RootState } from '../store';
 
-const initialState: NavLinkProps[] = [];
+const initialState: NavLinkProps[] = [
+  {
+    href: '/',
+    title: 'Home',
+  },
+  {
+    href: '/rating',
+    title: 'Rating',
+  },
+];
 
 const navSlices = createSlice({
   name: 'nav',

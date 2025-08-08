@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '../store';
 
-const initialState: string = '';
+const initialState: string = `&copy; ${new Date().getFullYear()}`;
 
 const footerSlices = createSlice({
   name: 'footer',

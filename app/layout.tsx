@@ -20,7 +20,7 @@ export default async function Layout({ children }: PropsWithChildren) {
   );
 
   let { results } = await fetcher<ParticipantsResultsProps>(
-    `/?seed=constant-user&results=${numParticipants}`,
+    `/?seed=constant-user&results=${numParticipants || 10}`,
     process.env.NEXT_PUBLIC_PARTICIPANT_API
   );
 
@@ -50,7 +50,7 @@ export default async function Layout({ children }: PropsWithChildren) {
   }
 
   return (
-    <html lang={lang}>
+    <html lang={lang || 'en'}>
       <body suppressHydrationWarning={true}>
         <SocketProvider>
           <StoreProvider initialState={{ nav, participants: results, footer }}>
