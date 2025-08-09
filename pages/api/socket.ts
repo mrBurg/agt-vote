@@ -24,34 +24,42 @@ export default function handler(
     });
 
     io.on('connection', (socket) => {
-      const userId = socket.id;
-
-      console.log(`🔌 New client connected. ID: ${userId}`);
-
-      if (!users[userId]) {
-        users[userId] = {
-          id: userId,
-          votesRemaining: 5,
-        };
-      }
+      console.log(`🔌 New client connected. ID: ${socket.id}`);
 
       const messageType = 'message';
 
       socket.on(messageType, (data) => {
         /* socket.emit(
           messageType,
-          `From socket to page to current client: ${data}`
+          `From socket to page to current client. ID: ${data}`
         ); */
         /* socket.broadcast.emit(
           messageType,
-          `From socket to page to all except current client: ${data}`
+          `From socket to page to all except current client. ID: ${data}`
         ); */
-        io.emit(messageType, `From socket to page to all clients: ${data}`);
+        io.emit(messageType, `From socket to page to all clients. ID: ${data}`);
       });
 
-      socket.on('getData', () => {
-        io.emit('getParticipants', participants);
+      socket.on('getData', (clientId) => {
+        let userId = clientId;
+
+        if (clientId && users[clientId]) {
+          userId = clientId;
+
+          console.log(`♻️ Connected as an existing user. ID: ${clientId}`);
+        } else {
+          userId = socket.id;
+
+          users[userId] = {
+            id: userId,
+            votesRemaining: 5,
+          };
+
+          console.log(`✨ Connected as a new user. ID: ${userId}`);
+        }
+
         socket.emit('getClient', users[userId]);
+        io.emit('getParticipants', participants);
       });
 
       const setParticipantsType = 'setParticipants';
@@ -64,8 +72,6 @@ export default function handler(
 
       socket.on('setVotes', ({ id, votesRemaining }) => {
         users[id] = { ...users[id], votesRemaining };
-
-        console.log(users[id]);
       });
 
       socket.on('disconnect', () => {

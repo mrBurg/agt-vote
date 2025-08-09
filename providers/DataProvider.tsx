@@ -21,9 +21,11 @@ export function DataProvider() {
       const getParticipantsType = 'getParticipants';
       const setParticipantsType = 'setParticipants';
 
-      socket.emit(getDataType);
+      socket.emit(getDataType, localStorage.getItem('clientId'));
 
       socket.on(getClientType, (client) => {
+        localStorage.setItem('clientId', client.id);
+
         dispatch(setClient(client));
       });
 
