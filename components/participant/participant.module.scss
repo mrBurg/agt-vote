@@ -1,13 +1,13 @@
 @use 'sass:color';
 
-@use './../../styles/service/constants.module' as *;
+@use './../../styles/service/placeholders' as *;
 
 .participant {
     // background-color: color.change($backgroundColor, $alpha: 0.8);
     background-color: rgba($backgroundColor, 0.8);
     padding: 1.5em;
     border-radius: 1em;
-    border: solid 1px $lightBorderColor;
+    border: solid 1px $borderColor;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 }
@@ -68,4 +68,14 @@
 .animate {
     animation: fly-up 500ms ease-in forwards;
     pointer-events: none;
+}
+
+.rate {
+    &_disabled {
+        polygon,
+        line {
+            stroke: $disabled;
+            @extend %transition;
+        }
+    }
 }

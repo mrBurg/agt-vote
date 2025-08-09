@@ -7,7 +7,7 @@
 
     :global(.link) {
         text-decoration: none;
-        color: $lightTextColor;
+        color: $textColor;
 
         &:hover {
             text-decoration: underline;

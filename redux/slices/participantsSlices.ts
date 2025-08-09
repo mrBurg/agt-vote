@@ -10,7 +10,8 @@ const participantsSlices = createSlice({
   name: 'participants',
   initialState,
   reducers: {
-    setParticipants: (_state, action: PayloadAction<any>) => action.payload,
+    setParticipants: (_state, action: PayloadAction<ParticipantProps[]>) =>
+      action.payload,
     updateVote(state, action: PayloadAction<string>) {
       const participant = find(
         state,
@@ -18,7 +19,7 @@ const participantsSlices = createSlice({
       );
 
       if (participant) {
-        participant.votes += 1;
+        participant.votes++;
       }
     },
   },

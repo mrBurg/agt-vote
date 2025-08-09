@@ -1,19 +1,23 @@
 'use client';
 
-import { type PropsWithChildren, useMemo } from 'react';
+import { type PropsWithChildren, useRef } from 'react';
 import { Provider } from 'react-redux';
 
 import type { FooterProps, NavProps, ParticipantsProps } from '@/redux/slices';
 
-import { createStore } from '@/redux/store';
-import { ParticipantsProvider } from './ParticipantsProvider';
+import { AppStore, createStore } from '@/redux/store';
+import { DataProvider } from './DataProvider';
 
 export function StoreProvider({ children, initialState }: InitialStateProps) {
-  const store = useMemo(() => createStore(initialState), [initialState]);
+  const storeRef = useRef<AppStore>(undefined);
+
+  if (!storeRef.current) {
+    storeRef.current = createStore(initialState);
+  }
 
   return (
-    <Provider store={store}>
-      <ParticipantsProvider />
+    <Provider store={storeRef.current}>
+      <DataProvider />
       {children}
     </Provider>
   );

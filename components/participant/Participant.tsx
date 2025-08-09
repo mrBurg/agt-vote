@@ -6,8 +6,8 @@ import styles from './participant.module.scss';
 import Rate from './assets/rate.svg';
 
 import { Avatar } from '../avatar';
-import { useAppDispatch } from '@/redux/hooks';
-import { updateVote } from '@/redux/slices';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { selectVotes, updateVote, updateVotesRemaining } from '@/redux/slices';
 
 export function Participant({
   picture,
@@ -19,6 +19,7 @@ export function Participant({
   const dispatch = useAppDispatch();
   const rateRef = useRef<SVGSVGElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
+  const votesRemaining = useAppSelector(selectVotes);
 
   const handleClick = () => {
     if (isAnimating) {
@@ -26,6 +27,7 @@ export function Participant({
     }
 
     dispatch(updateVote(login.salt));
+    dispatch(updateVotesRemaining());
     setIsAnimating(true);
   };
 
@@ -66,11 +68,14 @@ export function Participant({
           className={styles.button}
           type="button"
           onClick={handleClick}
-          disabled={isAnimating}
+          disabled={isAnimating || !votesRemaining}
         >
           <Rate
             ref={rateRef}
-            className={classNames({ [styles.animate]: isAnimating })}
+            className={classNames({
+              [styles.animate]: isAnimating,
+              [styles.rate_disabled]: !votesRemaining,
+            })}
           />
         </button>
       </div>

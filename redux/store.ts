@@ -9,6 +9,8 @@ import {
   participantsReducer,
   footerName,
   footerReducer,
+  clientName,
+  clientReducer,
 } from './slices';
 import { participantsSocketMiddleware } from './middlewares';
 
@@ -20,6 +22,7 @@ export function createStore(preloadedState?: ParticipantsProps) {
       [participantsName]: participantsReducer,
       [navName]: navReducer,
       [footerName]: footerReducer,
+      [clientName]: clientReducer,
       // [api.reducerPath]: api.reducer,
     }),
     middleware: (getDefaultMiddleware) =>

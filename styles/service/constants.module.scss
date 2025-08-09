@@ -6,8 +6,9 @@ $tablet: 1024px;
 $desktop: 1280px;
 
 $backgroundColor: #0b1f35;
-$lightTextColor: white;
-$lightBorderColor: white;
+$disabled: #848484;
+$textColor: white;
+$borderColor: white;
 
 :export {
     minWidth: $minWidth;

@@ -6,7 +6,7 @@ import type { Socket as NetSocket } from 'net';
 import type { ParticipantProps } from '@/components/participant';
 
 let participants: ParticipantProps[] = [];
-// const users: Record<string, UserVoteData> = {};
+const users: Record<string, UserVoteData> = {};
 
 export default function handler(
   _req: NextApiRequest,
@@ -28,49 +28,44 @@ export default function handler(
 
       console.log(`🔌 New client connected. ID: ${userId}`);
 
-      /* if (!users[userId]) {
+      if (!users[userId]) {
         users[userId] = {
           id: userId,
-          votesRemaining: Math.ceil(Math.random() * 10),
+          votesRemaining: 5,
         };
-      } */
+      }
 
-      /* socket.on('vote', (participantId) => {
-        let { votesRemaining } = users[userId];
+      const messageType = 'message';
 
-        if (votesRemaining > 0) {
-          votesRemaining--;
-
-          // Обнови голос участника
-          // updateVote(participantId);
-
-          // Верни статус клиенту
-          socket.emit('voteSuccess', { remaining: votesRemaining });
-        } else {
-          socket.emit('voteDenied', 'No votes left');
-        }
-      }); */
-
-      const message = 'message';
-
-      socket.on(message, (data) => {
-        // socket.emit(message, 'From socket to page');
-        // socket.broadcast.emit(message, 'From socket to page');
-        io.emit(message, `From socket to page ${data}`);
+      socket.on(messageType, (data) => {
+        /* socket.emit(
+          messageType,
+          `From socket to page to current client: ${data}`
+        ); */
+        /* socket.broadcast.emit(
+          messageType,
+          `From socket to page to all except current client: ${data}`
+        ); */
+        io.emit(messageType, `From socket to page to all clients: ${data}`);
       });
 
-      const setParticipants = 'setParticipants';
+      socket.on('getData', () => {
+        io.emit('getParticipants', participants);
+        socket.emit('getClient', users[userId]);
+      });
 
-      socket.on(setParticipants, (data) => {
+      const setParticipantsType = 'setParticipants';
+
+      socket.on(setParticipantsType, (data) => {
         participants = data;
 
-        io.emit(setParticipants, data);
+        io.emit(setParticipantsType, data);
       });
 
-      const getParticipants = 'getParticipants';
+      socket.on('setVotes', ({ id, votesRemaining }) => {
+        users[id] = { ...users[id], votesRemaining };
 
-      socket.on(getParticipants, () => {
-        io.emit(getParticipants, participants);
+        console.log(users[id]);
       });
 
       socket.on('disconnect', () => {
@@ -94,7 +89,7 @@ type NextApiResponseWithSocketIO = NextApiResponse & {
   };
 };
 
-/* type UserVoteData = {
+type UserVoteData = {
   id: string;
   votesRemaining: number;
-}; */
+};
